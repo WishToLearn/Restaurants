@@ -1,0 +1,87 @@
+@Restaurants.API_HostAddress = http://localhost:5183
+@token = CfDJ8Oo6nqRjdc5BpHLkuAMh70SfYThqHBfeojyXHDL6ik_5OORzUUwXqEWTxNZ0gkifGVoZuac8PS42rxI1vMM59g9Ad4FmZjXmjdcGrhJ7t6N0MgExb79HiYIKqCHZsU5MMuX6sDRktZ2xXV9cK_smGfMWpV-PaTF1bkJWp0RU2YtJO2wZhkPiYW6AcIDuTtImQZJ2lEssQU7SPffAa_0Uq2fJVVJWFm0l8exWzBWskE-m4JSrGV5jIrnsWWbUASnE5lVNbTPkmYCp5e-J4Jpy10d5VHc_s_rulTjoRuoaM-jTlbAKdi2ELH9UHDqnhD621QSVcmhCvstiYKuDYEuVPHBeeT_gAv-DkRdSjurOghVg2XEqH-OjQ8RQp7DHqxoD5IkmE4qXdelcYbXFqB1O8S4rRaJ_nWT3Q6g0gcVt1N3-sfmlEtTHGKUvQ8LixGJCPcsuj2KP6Eo9-YZxNtUJYViB0x__CrblvLJ0Xn7yr16k0jfAzLsQjiwcth6aQCAc3xOjNe5pSnqAwSb1pZtajT-5prDQWy_ikvYokhjWRjoLRp2aJ-vjyiQgaCE4_WUW1w77gjp1Did7XcLHJOXx2T9PbWZu1OdSSLQ5BYQP4JMiaPTL8_1_D1G9yS1jqDKV2YTNW0Gb63C7HBEmnRzJcDeBbJUjVaxye1Iu2jzS_MJxkuOD70iVv4CAuDKE8s0BHw
+
+POST {{Restaurants.API_HostAddress}}/api/restaurants
+Content-Type: application/json
+
+{
+  "name": "Aastha Bakery",
+  "description": "The best bakery around you!",
+  "category": "Cakes & Cookies",
+  "hasDelivery": true,
+  "contactEmail": "aastha.bakes.cakes@gmail.com",
+  "contactNumber": "+91 0123456789",
+  "city": "Tarapur",
+  "street": "AB 123",
+  "postalCode": "12-445"
+}
+
+###
+
+GET {{Restaurants.API_HostAddress}}/api/restaurants
+
+###
+
+@id=15
+GET {{Restaurants.API_HostAddress}}/api/restaurants/{{id}}
+Authorization: Bearer {{token}}
+
+###
+
+@id=17
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/{{id}}
+
+###
+
+@id=14
+PATCH {{Restaurants.API_HostAddress}}/api/restaurants/{{id}}
+Content-Type: application/json
+
+{
+    "name": "Saffron Delight",
+    "description": "Traditional Afghan cuisine.",
+    "hasDelivery": true
+}
+
+###
+
+POST {{Restaurants.API_HostAddress}}/api/restaurants/{restaurantId}/dishes
+Content-Type: application/json
+
+{
+  //CreateDishCommand
+}
+
+###
+
+@restaurantId=0
+GET {{Restaurants.API_HostAddress}}/api/restaurants/{{restaurantId}}/dishes
+
+###
+
+@dishId=0
+GET {{Restaurants.API_HostAddress}}/api/restaurants/{{restaurantId}}/dishes/{{dishId}}
+
+###
+
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/{{restaurantId}}/dishes
+
+###
+
+POST {{Restaurants.API_HostAddress}}/api/identity/register
+Content-Type: application/json
+
+{
+  "email": "rahul.s@test.com",
+  "password": "Rahul@123"
+}
+
+###
+
+POST {{Restaurants.API_HostAddress}}/api/identity/login
+Content-Type: application/json
+
+{
+  "email": "rahul.s@test.com",
+  "password": "Rahul@123"
+}
