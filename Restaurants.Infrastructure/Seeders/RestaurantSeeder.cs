@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Restaurants.Domain.Constants;
 using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Persistance;
@@ -9,6 +10,11 @@ namespace Restaurants.Infrastructure.Seeders
     {
         public async Task Seed()
         {
+            if(dbContext.Database.GetPendingMigrations().Any())
+            {
+                await dbContext.Database.MigrateAsync();
+            }
+
             if (await dbContext.Database.CanConnectAsync())
             {
                 if (!dbContext.Restaurants.Any())
@@ -29,6 +35,11 @@ namespace Restaurants.Infrastructure.Seeders
 
         private IEnumerable<Restaurant> GetRestaurants()
         {
+            var owner = new User
+            {
+                Email = "seed-user@test.com"
+            };
+
             var restaurants = new List<Restaurant>
             {
                 new Restaurant
@@ -39,6 +50,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = true,
                     ContactEmail = "contact@spicevilla.com",
                     ContactNumber = "111-222-3333",
+                    Owner = owner,
                     Address = new Address { City = "New York", Street = "Lexington Ave", PostalCode = "10001" },
                     Dishes = new List<Dish>
                     {
@@ -54,6 +66,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = false,
                     ContactEmail = "info@tacohaven.com",
                     ContactNumber = "987-654-3210",
+                    Owner = owner,
                     Address = new Address { City = "Los Angeles", Street = "Sunset Blvd", PostalCode = "90028" },
                     Dishes = new List<Dish>
                     {
@@ -69,6 +82,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = false,
                     ContactEmail = "hello@pastaparadise.com",
                     ContactNumber = "222-888-9999",
+                    Owner = owner,
                     Address = new Address { City = "Miami", Street = "Ocean Drive", PostalCode = "33139" },
                     Dishes = new List<Dish>
                     {
@@ -84,6 +98,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = true,
                     ContactEmail = "info@americandiner.com",
                     ContactNumber = "444-321-6789",
+                    Owner = owner,
                     Address = new Address { City = "Chicago", Street = "Lake Shore Drive", PostalCode = "60601" },
                     Dishes = new List<Dish>
                     {
@@ -99,6 +114,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = true,
                     ContactEmail = "support@saffrondelight.com",
                     ContactNumber = "333-777-5555",
+                    Owner = owner,
                     Address = new Address { City = "Dallas", Street = "Main Street", PostalCode = "75201" },
                     Dishes = new List<Dish>
                     {
@@ -114,6 +130,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = true,
                     ContactEmail = "info@littleitaly.com",
                     ContactNumber = "666-123-4567",
+                    Owner = owner,
                     Address = new Address { City = "San Francisco", Street = "Fisherman's Wharf", PostalCode = "94109" },
                     Dishes = new List<Dish>
                     {
@@ -129,6 +146,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = false,
                     ContactEmail = "contact@mexicanfiesta.com",
                     ContactNumber = "999-333-2222",
+                    Owner = owner,
                     Address = new Address { City = "San Diego", Street = "Gaslamp Quarter", PostalCode = "92101" },
                     Dishes = new List<Dish>
                     {
@@ -144,6 +162,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = true,
                     ContactEmail = "biryani@biryanihouse.com",
                     ContactNumber = "555-666-7777",
+                    Owner = owner,
                     Address = new Address { City = "Houston", Street = "Richmond Ave", PostalCode = "77057" },
                     Dishes = new List<Dish>
                     {
@@ -159,6 +178,7 @@ namespace Restaurants.Infrastructure.Seeders
                     HasDelivery = true,
                     ContactEmail = "order@sunrisebakery.com",
                     ContactNumber = "777-888-9999",
+                    Owner = owner,
                     Address = new Address { City = "Seattle", Street = "Pine Street", PostalCode = "98101" },
                     Dishes = new List<Dish>
                     {

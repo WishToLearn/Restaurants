@@ -71,5 +71,24 @@ namespace Restaurants.API.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UploadLogo([FromRoute] int id, IFormFile file)
+        {
+            using var stream = file.OpenReadStream();
+
+            var request = new UploadRestaurantLogoCommand()
+            {
+                RestaurantId = id,
+                FileName = file.FileName,
+                File = stream
+            };
+
+            await mediator.Send(request);
+
+            return NoContent();
+        }
     }
 }
