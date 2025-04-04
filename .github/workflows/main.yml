@@ -1,4 +1,5 @@
 name: restaurant-api
+
 on:
   push:
     branches: [ master ]
@@ -18,8 +19,8 @@ jobs:
         with:
           dotnet-version: 8.0.x
       - name: Restore Dependencies
-        uses: dotnet restore
+        run: dotnet restore
       - name: Build
-        uses: dotnet build --no restore
+        run: dotnet build --no restore
       - name: Test
-        uses: dotnet test
+        run: dotnet test
