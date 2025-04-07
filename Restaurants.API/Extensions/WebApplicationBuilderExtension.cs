@@ -7,6 +7,26 @@ namespace Restaurants.API.Extensions
     {
         public static void AddPresentation(this WebApplicationBuilder builder)
         {
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+
+                options.AddPolicy("AllowRestricted", policy =>
+                {
+                    policy.WithOrigins(
+                                "https://app1.example.com",
+                                "https://app2.example.com"
+                            )
+                          .WithMethods("GET", "POST")
+                          .WithHeaders("Content-Type", "Authorization");
+                });
+            });
+
             builder.Services.AddControllers();
 
             builder.Services.AddScoped<ErrorHandlingMiddleware>();
