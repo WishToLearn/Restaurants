@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Commands.Resraurant;
 using Restaurants.Application.DTOs;
 using Restaurants.Application.Queries.Restaurant;
-using Restaurants.Infrastructure.Authorization;
+using Restaurants.Domain.Constants;
 
 namespace Restaurants.API.Controllers
 {
@@ -33,7 +33,7 @@ namespace Restaurants.API.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [Authorize(Policy = PolicyName.HasNationality)]
+        [AllowAnonymous]
         public async Task<ActionResult<RestaurantDTO>> GetRestaurant([FromRoute]int id)
         {
             var restaurant = await mediator.Send(new GetRestaurantsByIdQuery(id));
@@ -43,6 +43,7 @@ namespace Restaurants.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [Authorize(Roles = nameof(UserRoles.Owner))]
         public async Task<IActionResult> CreateRestaurant([FromBody]CreateRestaurantCommand request)
         {
             var id = await mediator.Send(request);
@@ -75,6 +76,7 @@ namespace Restaurants.API.Controllers
         [HttpPost("{id}/logo")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Authorize(Roles = nameof(UserRoles.Owner))]
         public async Task<IActionResult> UploadLogo([FromRoute] int id, IFormFile file)
         {
             using var stream = file.OpenReadStream();
@@ -89,12 +91,6 @@ namespace Restaurants.API.Controllers
             await mediator.Send(request);
 
             return NoContent();
-        }
-
-        [HttpGet("/testifdeployed")]
-        public async Task<IActionResult> Check()
-        {
-            return Ok("Deployed");
         }
     }
 }
