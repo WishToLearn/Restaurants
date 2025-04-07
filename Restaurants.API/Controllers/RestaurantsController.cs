@@ -90,5 +90,11 @@ namespace Restaurants.API.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("/testifdeployed")]
+        public async Task<IActionResult> Check()
+        {
+            return Ok("Deployed");
+        }
     }
 }
