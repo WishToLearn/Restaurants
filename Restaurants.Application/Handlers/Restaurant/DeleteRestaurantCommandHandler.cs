@@ -22,9 +22,9 @@ namespace Restaurants.Application.Handlers.Restaurant
                 throw new NotFoundException(nameof(Restaurants.Domain.Entities.Restaurant), request.Id.ToString());
             }
 
-            var isAuthorizedToDelete = restaurantAuthorizationService.IsAuthorize(restaurant, ResourceOperation.Delete);
+            var isAuthorized = restaurantAuthorizationService.IsAuthorize(restaurant, ResourceOperation.Delete);
             
-            if (!isAuthorizedToDelete)
+            if (!isAuthorized)
             {
                 throw new ForbidException();
             }

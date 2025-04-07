@@ -21,9 +21,9 @@ namespace Restaurants.Application.Handlers.Restaurant
                 throw new NotFoundException(nameof(Restaurants.Domain.Entities.Restaurant), request.RestaurantId.ToString());
             }
 
-            var isAuthorizedToUpload = restaurantAuthorizationService.IsAuthorize(restaurant, ResourceOperation.Update);
+            var isAuthorized = restaurantAuthorizationService.IsAuthorize(restaurant, ResourceOperation.Update);
 
-            if (!isAuthorizedToUpload)
+            if (!isAuthorized)
             {
                 throw new ForbidException();
             }
