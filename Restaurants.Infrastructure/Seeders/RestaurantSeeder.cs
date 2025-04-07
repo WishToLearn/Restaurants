@@ -197,22 +197,22 @@ namespace Restaurants.Infrastructure.Seeders
             {
                 new IdentityRole
                 {
-                    Name = UserRoles.User,
-                    NormalizedName = UserRoles.User.ToUpper()
+                    Name = nameof(UserRoles.User),
+                    NormalizedName = nameof(UserRoles.User).ToUpper()
                 },
                 new IdentityRole
                 {
-                    Name = UserRoles.Owner,
-                    NormalizedName= UserRoles.Owner.ToUpper()
+                    Name = nameof(UserRoles.Owner),
+                    NormalizedName= nameof(UserRoles.Owner).ToUpper()
                 },
                 new IdentityRole
                 {
-                    Name = UserRoles.Admin,
-                    NormalizedName = UserRoles.Admin.ToUpper()
+                    Name = nameof(UserRoles.Admin),
+                    NormalizedName = nameof(UserRoles.Admin).ToUpper()
                 }
             };
 
             return roles;
-        } 
+        }
     }
 }

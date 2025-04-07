@@ -18,11 +18,11 @@ namespace Restaurants.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [AllowAnonymous]
-        public async Task<ActionResult<IEnumerable<RestaurantDTO>>> GetAllRestaurants()
+        public async Task<ActionResult<IEnumerable<RestaurantDTO>>> GetAllRestaurants([FromQuery] GetAllRestaurantsQuery request)
         {
-            var restaurants = await mediator.Send(new GetAllRestaurantsQuery());
+            var restaurants = await mediator.Send(request);
 
-            if (!restaurants.Any())
+            if (!restaurants.Items.Any())
             {
                 return NoContent();
             }
@@ -72,7 +72,7 @@ namespace Restaurants.API.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{id}/logo")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UploadLogo([FromRoute] int id, IFormFile file)
