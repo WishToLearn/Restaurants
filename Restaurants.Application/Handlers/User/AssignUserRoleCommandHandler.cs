@@ -27,7 +27,6 @@ namespace Restaurants.Application.Handlers.User
             }
 
             await userManager.AddToRoleAsync(user, role.Name!);
-
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Restaurants.Infrastructure.Authorization.Services
                 return true;
             }
 
-            if (resourceOperation == ResourceOperation.Delete && currentUser.IsInRole(UserRoles.Owner))
+            if (resourceOperation == ResourceOperation.Delete && currentUser.IsInRole(nameof(UserRoles.Owner)))
             {
                 logger.LogInformation("Admin, Delete Operation - Authorization Successful");
 

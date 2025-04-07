@@ -20,7 +20,7 @@ namespace Restaurants.API.Controllers
         }
 
         [HttpPost("userRole")]
-        [Authorize(Roles = UserRoles.Admin)]
+        [Authorize(Roles = nameof(UserRoles.Admin))]
         public async Task<IActionResult> AssignUserRole([FromBody] AssignUserRoleCommand request)
         {
             await mediator.Send(request);
@@ -29,7 +29,7 @@ namespace Restaurants.API.Controllers
         }
 
         [HttpDelete("userRole")]
-        [Authorize(Roles = UserRoles.Admin)]
+        [Authorize(Roles = nameof(UserRoles.Admin))]
         public async Task<IActionResult> UnassignUserRole([FromBody] UnassignUserRoleCommand request)
         {
             await mediator.Send(request);
