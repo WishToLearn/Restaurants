@@ -16,9 +16,9 @@ builder.Services.AddApplication();
 var app = builder.Build();
 
 // Seed the application with data.
-var scope = app.Services.CreateScope();
-var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
-await seeder.Seed();
+//var scope = app.Services.CreateScope();
+//var seeder = scope.ServiceProvider.GetRequiredService<IRestaurantSeeder>();
+//await seeder.Seed();
 
 // ______ Configure the HTTP request pipeline. ______ //
 // Kept at top, so that, this middleware can handle error througout the application.
