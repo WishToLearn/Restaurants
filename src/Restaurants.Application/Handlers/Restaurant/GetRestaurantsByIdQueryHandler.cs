@@ -13,7 +13,7 @@ namespace Restaurants.Application.Handlers.Restaurant
     {
         public async Task<RestaurantDTO> Handle(GetRestaurantsByIdQuery request, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Fetching the Restaurant");
+            logger.LogInformation($"Fetching the Restaurant with restaurantId: {request.Id}");
 
             var restaurant = await restaurantsRepository.GetAsync(request.Id) ?? throw new NotFoundException(nameof(Restaurants.Domain.Entities.Restaurant), request.Id.ToString());
 

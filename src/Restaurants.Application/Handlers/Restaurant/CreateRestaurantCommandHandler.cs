@@ -13,7 +13,7 @@ namespace Restaurants.Application.Handlers.Restaurant
         {
             var currentUser = userContext.GetCurrentUser();
 
-            logger.LogInformation("{UserEmail} - {UserId} is creating a Restaurant", currentUser!.Email, currentUser.Id);
+            logger.LogInformation("{UserEmail} - {UserId} is creating a {@Restaurant}", currentUser!.Email, currentUser.Id, request);
 
             var createRestaurant = mapper.Map<Restaurants.Domain.Entities.Restaurant>(request);
 
