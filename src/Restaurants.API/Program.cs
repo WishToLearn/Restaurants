@@ -3,14 +3,17 @@ using Restaurants.API.Middlewares;
 using Restaurants.Application.Extensions;
 using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Extensions;
-using Restaurants.Infrastructure.Seeders;
+//using Restaurants.Infrastructure.Seeders;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // ______ Configure and register services in the dependency injection container. ______ //
 
 builder.AddPresentation();
+
 builder.Services.AddInfrastructure(builder.Configuration);
+
 builder.Services.AddApplication();
 
 var app = builder.Build();
@@ -23,6 +26,10 @@ var app = builder.Build();
 // ______ Configure the HTTP request pipeline. ______ //
 // Kept at top, so that, this middleware can handle error througout the application.
 app.UseMiddleware<ErrorHandlingMiddleware>();
+
+app.UseMiddleware<RequestTimeLoggingMiddleware>();
+
+app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {

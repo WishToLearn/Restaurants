@@ -13,7 +13,7 @@ namespace Restaurants.Application.Handlers.User
         {
             var currentUser = userContext.GetCurrentUser();
 
-            logger.LogInformation($"Updating a user with userId: {currentUser!.Id} with following request {request}");
+            logger.LogInformation("Updating a user with userId: {userId} with following request {request}", currentUser!.Id, request);
 
             var dbUser = await userStore.FindByIdAsync(currentUser!.Id, cancellationToken);
 

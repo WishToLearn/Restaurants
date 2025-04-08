@@ -1,5 +1,7 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 using Restaurants.API.Middlewares;
+using Serilog;
 
 namespace Restaurants.API.Extensions
 {
@@ -30,6 +32,13 @@ namespace Restaurants.API.Extensions
             builder.Services.AddControllers();
 
             builder.Services.AddScoped<ErrorHandlingMiddleware>();
+
+            builder.Services.AddScoped<RequestTimeLoggingMiddleware>();
+
+            builder.Host.UseSerilog((context, configuration) =>
+            {
+                configuration.ReadFrom.Configuration(context.Configuration);
+            });
 
             builder.Services.AddSwaggerGen(config =>
             {
