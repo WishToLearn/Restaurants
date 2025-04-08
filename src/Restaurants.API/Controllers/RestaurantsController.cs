@@ -8,7 +8,6 @@ using Restaurants.Domain.Constants;
 
 namespace Restaurants.API.Controllers
 {
-
     [ApiController]
     [Route("api/restaurants")]
     [Authorize]

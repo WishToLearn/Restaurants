@@ -40,3 +40,5 @@ app.MapControllers().RequireCors("AllowLocalhost");
 app.MapControllers().RequireCors("AllowRestricted");
 
 app.Run();
+
+public partial class Program { }
