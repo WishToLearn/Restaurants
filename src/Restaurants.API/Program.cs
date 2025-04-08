@@ -36,8 +36,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers().RequireCors("AllowLocalhost");
-app.MapControllers().RequireCors("AllowRestricted");
+//app.MapControllers().RequireCors("AllowLocalhost");
+//app.MapControllers().RequireCors("AllowRestricted");
+app.MapControllers();
 
 app.Run();
 
