@@ -29,7 +29,7 @@ namespace Restaurants.Application.Handlers.Restaurant
 
             mapper.Map(request, restaurant);
 
-            logger.LogInformation("Updating the Rstaurant");
+            logger.LogInformation("Updating the {@Rstaurant}", restaurant);
 
             await restaurantsRepository.UpdateAsync(restaurant);
         }

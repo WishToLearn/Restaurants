@@ -12,7 +12,7 @@ namespace Restaurants.Application.Handlers.Restaurant
     {
         public async Task Handle(UploadRestaurantLogoCommand request, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Updating the logo for the Restaurant: {RestaurantId}", request.RestaurantId);
+            logger.LogInformation("Updating the logo for the Restaurant: {restaurantId}", request.RestaurantId);
 
             var restaurant = await restaurantsRepository.GetAsync(request.RestaurantId);
 
@@ -30,7 +30,7 @@ namespace Restaurants.Application.Handlers.Restaurant
 
             var logoUrl = await blobStorageService.UploadToBlobAsync(request.File, request.FileName);
 
-            logger.LogInformation("Uploaded the logo for the Restaurant: {RestaurantId}", request.RestaurantId);
+            logger.LogInformation("Uploaded the logo for the Restaurant: {restaurantId}", request.RestaurantId);
             
             restaurant.LogoUrl = logoUrl;
 

@@ -13,7 +13,7 @@ namespace Restaurants.Application.Handlers.Dish
     {
         public async Task<int> Handle(CreateDishCommand request, CancellationToken cancellationToken)
         {
-            logger.LogInformation("Creating a dish for a restaurant");
+            logger.LogInformation("Creating a {@Dish} for a restaurant", request);
 
             var restaurant = await restaurantsRepository.GetAsync(request.RestaurantId);
 
