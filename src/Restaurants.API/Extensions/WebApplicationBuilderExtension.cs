@@ -11,6 +11,7 @@ namespace Restaurants.API.Extensions
         {
             builder.Services.AddCors(options =>
             {
+                /*
                 options.AddPolicy("AllowLocalhost", policy =>
                 {
                     policy.WithOrigins("http://localhost:3000")
@@ -26,6 +27,14 @@ namespace Restaurants.API.Extensions
                             )
                           .WithMethods("GET", "POST")
                           .WithHeaders("Content-Type", "Authorization");
+                });
+                */
+
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
                 });
             });
 
